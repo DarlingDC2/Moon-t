@@ -1,3 +1,4 @@
+
 // Magic 8 Ball API
 const magic8BallAPI = 'https://example.com/magic8ball';
 
@@ -109,3 +110,6 @@ saveButton.addEventListener('click', handleSaveCrypto);
 
 // Call the function to load saved cryptocurrencies when the page loads
 loadSavedCryptos();
+=======
+
+
