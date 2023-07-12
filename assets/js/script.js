@@ -15,6 +15,7 @@ async function fetchCryptoData() {
   try {
     const response = await fetch(coinAPI);
     const data = await response.json();
+    console.log('Cryptocurrency data:', data); // Log the received data
     return data;
   } catch (error) {
     console.log('Error fetching cryptocurrency data:', error);
@@ -53,6 +54,8 @@ function handleMagic8BallShake() {
   // Fetch cryptocurrency data
   fetchCryptoData()
     .then(data => {
+      console.log('Data received from fetchCryptoData:', data); // Log the received data
+
       // Randomly select a cryptocurrency from the top 100
       const randomIndex = Math.floor(Math.random() * 100);
       const selectedCrypto = data[randomIndex];
