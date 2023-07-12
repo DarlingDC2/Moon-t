@@ -110,6 +110,5 @@ saveButton.addEventListener('click', handleSaveCrypto);
 
 // Call the function to load saved cryptocurrencies when the page loads
 loadSavedCryptos();
-=======
 
 
