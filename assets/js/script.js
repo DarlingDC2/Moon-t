@@ -8,7 +8,7 @@ const coinAPI = 'https://rest.coinapi.io/7b72ea8e-06cd-478c-a3bb-db22a10da94c';
 const nodeAsServiceAPI = 'wss://ws.coinapi.io/v1/f742dc80-ee75-4715-b022-220e5d9ed028';
 
 // EMS API
-const emsAPI = ' https://postman.coinapi.io/d8952a6c-b2a2-4f79-81c7-0bc3922a67e5';
+const emsAPI = 'https://postman.coinapi.io/d8952a6c-b2a2-4f79-81c7-0bc3922a67e5';
 
 // Function to fetch cryptocurrency data
 async function fetchCryptoData() {
