@@ -55,7 +55,7 @@ body, header, nav, ul, li, a {
     z-index: 1;
   }
   
-  .dropdown-content a {
+  .dropdownContent a {
     display: block;
     text-align: center;
     font-size: 35px;
@@ -63,13 +63,13 @@ body, header, nav, ul, li, a {
     color: var(--gold);
   }
   
-  .dropdown-btn:hover,
-  .dropdown-content a:hover {
+  .dropdownBtn:hover,
+  .dropdownContent a:hover {
     background-color: var(--grey);
   }
   
-  .dropdown-btn:focus + .dropdown-content,
-  .dropdown-content:hover {
+  .dropdownBtn:focus + .dropdownContent,
+  .dropdownContent:hover {
     display: block;
   }
   
