@@ -16,6 +16,10 @@ body, header, nav, ul, li, a {
   
   .h1text {
     color: #fff;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    position: absolute;
   }
   header {
     background-color: var(--blue);
@@ -23,11 +27,15 @@ body, header, nav, ul, li, a {
     top: 0;
     left: 0;
     width: 100%;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
   }
   
   nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: 10px;
   }

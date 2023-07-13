@@ -72,18 +72,20 @@ function saveCryptoToLocalstorage(cryptoName) {
   localStorage.setItem('savedCryptos', JSON.stringify(savedCryptos));
 }
 
-// Function to load saved cryptocurrencies from local storage
 function loadSavedCryptos() {
-  const savedCryptos = JSON.parse(localStorage.getItem('savedCryptos')) || [];
-
-  // Display the saved cryptocurrencies in the dropdown menu
-  const dropdownMenu = document.getElementById('dropdown-menu');
-  savedCryptos.forEach(crypto => {
-    const dropdownOption = document.createElement('option');
-    dropdownOption.textContent = crypto;
-    dropdownMenu.appendChild(dropdownOption);
-  });
-}
+    const savedCryptos = JSON.parse(localStorage.getItem('savedCryptos')) || [];
+  
+    // Display the saved cryptocurrencies in the dropdown menu
+    const dropdownContent = document.querySelector('.dropdownContent');
+    dropdownContent.innerHTML = ''; // Clear existing options
+  
+    savedCryptos.forEach(crypto => {
+      const dropdownOption = document.createElement('a');
+      dropdownOption.href = '#'; // Set the link for each option
+      dropdownOption.textContent = crypto;
+      dropdownContent.appendChild(dropdownOption);
+    });
+  }
 
 // Function to handle saving selected cryptocurrency to the dropdown menu and local storage
 function handleSaveCrypto() {
