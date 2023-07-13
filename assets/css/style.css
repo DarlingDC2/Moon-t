@@ -151,10 +151,8 @@ body {
     height: 200px;
     border-radius: 50%;
     background-color: var(--grey);
-    background-image: radial-gradient(#000 10%, transparent 10.01%);
-    background-size: 30px 30px;
-    animation: shake 0.6s infinite linear;
-    animation-play-state: paused;
+    
+   
   }
   
   
