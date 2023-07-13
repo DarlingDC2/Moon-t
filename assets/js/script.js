@@ -1,6 +1,6 @@
 
 // Magic 8 Ball API
-const magic8BallAPI = 'https://example.com/magic8ball';
+const magic8BallAPI = 'https://eightballapi.com/api';
 
 // CoinAPI
 const coinAPI = 'https://rest.coinapi.io/7b72ea8e-06cd-478c-a3bb-db22a10da94c';
