@@ -1,22 +1,20 @@
-
 // Magic 8 Ball API
-const magic8BallAPI = 'https://eightballapi.com/api';
+const magic8BallAPI = 'https://example.com/magic8ball';
 
 // CoinAPI
-const coinAPI = 'https://rest.coinapi.io/7b72ea8e-06cd-478c-a3bb-db22a10da94c';
+const coinAPI = 'https://rest.coinapi.io/v1/exchangerate/USD?apikey=7b72ea8e-06cd-478c-a3bb-db22a10da94c&invert=true&output_form';
 
 // Node As Service API
 const nodeAsServiceAPI = 'wss://ws.coinapi.io/v1/f742dc80-ee75-4715-b022-220e5d9ed028';
 
 // EMS API
-const emsAPI = 'https://postman.coinapi.io/d8952a6c-b2a2-4f79-81c7-0bc3922a67e5';
+const emsAPI = ' https://ems-mgmt.coinapi.io/accounts?apikey=d8952a6c-b2a2-4f79-81c7-0bc3922a67e5';
 
 // Function to fetch cryptocurrency data
 async function fetchCryptoData() {
   try {
     const response = await fetch(coinAPI);
     const data = await response.json();
-    console.log('Cryptocurrency data:', data); // Log the received data
     return data;
   } catch (error) {
     console.log('Error fetching cryptocurrency data:', error);
@@ -55,8 +53,6 @@ function handleMagic8BallShake() {
   // Fetch cryptocurrency data
   fetchCryptoData()
     .then(data => {
-      console.log('Data received from fetchCryptoData:', data); // Log the received data
-
       // Randomly select a cryptocurrency from the top 100
       const randomIndex = Math.floor(Math.random() * 100);
       const selectedCrypto = data[randomIndex];
@@ -110,5 +106,4 @@ saveButton.addEventListener('click', handleSaveCrypto);
 
 // Call the function to load saved cryptocurrencies when the page loads
 loadSavedCryptos();
-
 
