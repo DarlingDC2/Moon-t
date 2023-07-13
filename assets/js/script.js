@@ -8,7 +8,7 @@ const coinAPI = 'https://rest.coinapi.io/v1/exchangerate/USD?apikey=7b72ea8e-06c
 const nodeAsServiceAPI = 'wss://ws.coinapi.io/v1/f742dc80-ee75-4715-b022-220e5d9ed028';
 
 // EMS API
-const emsAPI = ' https://ems-mgmt.coinapi.io/accounts?apikey=d8952a6c-b2a2-4f79-81c7-0bc3922a67e5';
+const emsAPI = 'https://ems-mgmt.coinapi.io/accounts?apikey=d8952a6c-b2a2-4f79-81c7-0bc3922a67e5';
 
 // Function to fetch cryptocurrency data
 async function fetchCryptoData() {
@@ -18,6 +18,7 @@ async function fetchCryptoData() {
     return data;
   } catch (error) {
     console.log('Error fetching cryptocurrency data:', error);
+    throw error;
   }
 }
 
@@ -106,4 +107,3 @@ saveButton.addEventListener('click', handleSaveCrypto);
 
 // Call the function to load saved cryptocurrencies when the page loads
 loadSavedCryptos();
-
