@@ -8,7 +8,7 @@ const coinAPI = 'https://rest.coinapi.io/v1/exchangerate/USD?apikey=7b72ea8e-06c
 const nodeAsServiceAPI = 'wss://ws.coinapi.io/v1/f742dc80-ee75-4715-b022-220e5d9ed028';
 
 // EMS API
-const emsAPI = 'https://ems-mgmt.coinapi.io/accounts?apikey=d8952a6c-b2a2-4f79-81c7-0bc3922a67e5';
+const emsAPI = 'https://ems-mgmt.coinapi.io/?apikey=d8952a6c-b2a2-4f79-81c7-0bc3922a67e5';
 
 // Function to fetch cryptocurrency data
 async function fetchCryptoData() {
@@ -37,13 +37,49 @@ function displayCryptoDataGraph(crypto) {
   cryptoMarketData.textContent = `Price: ${crypto.price}, Market Cap: ${crypto.marketCap}`;
   ball.appendChild(cryptoMarketData);
 
-  // Save the selected cryptocurrency to the side dropdown menu and local storage
-  const dropdownMenu = document.getElementById('dropdown-menu');
-  const dropdownOption = document.createElement('option');
-  dropdownOption.textContent = crypto.name;
-  dropdownMenu.appendChild(dropdownOption);
+  // Create a canvas element for the graph
+  const canvas = document.createElement('canvas');
+  canvas.classList.add('crypto-graph');
+  ball.appendChild(canvas);
 
-  saveCryptoToLocalstorage(crypto.name);
+  // Generate the graph using a library (e.g., Chart.js)
+  generateCryptoGraph(canvas, crypto);
+}
+
+// Function to generate the cryptocurrency graph using Chart.js library
+function generateCryptoGraph(canvas, crypto) {
+  // Retrieve the market data for the cryptocurrency
+  const marketData = crypto.marketData;
+
+  // Extract the labels and values from the market data
+  const labels = Object.keys(marketData);
+  const values = Object.values(marketData);
+
+  // Create the chart using Chart.js
+  new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Market Data',
+          data: values,
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
 }
 
 // Function to handle Magic 8 Ball shake event
@@ -107,3 +143,4 @@ saveButton.addEventListener('click', handleSaveCrypto);
 
 // Call the function to load saved cryptocurrencies when the page loads
 loadSavedCryptos();
+
