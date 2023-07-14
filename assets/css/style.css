@@ -145,19 +145,18 @@ body {
     margin-top: 100px;
   }
   
-  .ball {
+  .moon {
     position: relative;
     width: 200px;
     height: 200px;
     border-radius: 50%;
     background-color: var(--grey);
-    background-image: radial-gradient(#000 10%, transparent 10.01%);
-    background-size: 30px 30px;
+    background-image: url("../img/moon.jpg");
+    background-size: cover;
+    background-position: center;
     animation: shake 0.6s infinite linear;
     animation-play-state: paused;
   }
-  
-  
   
   .answer {
     position: absolute;
