@@ -10,10 +10,6 @@
     --grey: #3a3e42;
     --footer: #113c68b9;
 }
-body, header, nav, ul, li, a {
-    margin: 0;
-    padding: 0;
-  }
   
   .h1text {
     color: #fff;
@@ -25,14 +21,13 @@ body, header, nav, ul, li, a {
   }
   header {
     background-color: var(--blue);
-
-    top: 0;
-    left: 0;
     width: 100%;
+    padding-top: 50px;
     color: #fff;
     text-align: center;
-
     box-sizing: border-box;
+    background-image: url("../img/background.jpg");
+    background-size: cover;
   }
   
   nav {
@@ -47,22 +42,23 @@ body, header, nav, ul, li, a {
   }
   
   .dropdownBtn {
-    padding: 15px 60px;
+    padding: 10px 60px;
     background-color: var(--gold);
     border:var(--grey);
-    border-radius: 10%;
+    border-radius: 5%;
     cursor: pointer;
   }
   
   .dropdownContent {
     display: none;
     position: absolute;
-    top: 100%;
-    right: 0;
+    top: 75%;
+    right: 25%;
     background-color: var(--ltblue);
-    min-width: 300px;
-    padding: 20px;
+    min-width: 250%;
+    padding: 30px;
     z-index: 1;
+    border-radius: 5%;
   }
   
   .dropdownContent a {
@@ -103,9 +99,10 @@ body {
     color: var(--gold);
     background-color: var(--footer);
     text-align: center;
-    width: 100%;
+    width: 95%;
     padding-bottom: 10px;
     font-size: 80%;
+    background-image: url("../img/space.jpg");
   }
   
   body {
