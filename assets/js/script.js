@@ -1,4 +1,3 @@
-// Magic 8 Ball API
 const magic8BallAPI = 'https://example.com/magic8ball';
 
 // CoinAPI
