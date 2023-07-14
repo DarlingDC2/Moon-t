@@ -84,24 +84,35 @@ function generateCryptoGraph(canvas, crypto) {
 
 // Function to handle Magic 8 Ball shake event
 function handleMagic8BallShake() {
-  // Perform Magic 8 Ball operations
-  // ...
-
-  // Fetch cryptocurrency data
-  fetchCryptoData()
-    .then(data => {
-      // Randomly select a cryptocurrency from the top 100
-      const randomIndex = Math.floor(Math.random() * 100);
-      const selectedCrypto = data[randomIndex];
-
-      // Display the selected cryptocurrency and its market data
-      displayCryptoDataGraph(selectedCrypto);
-    })
-    .catch(error => {
-      console.log('Error retrieving cryptocurrency data:', error);
-    });
-}
-
+    // Fetch cryptocurrency data
+    fetchCryptoData()
+      .then(data => {
+        console.log(data); // Log the data object to see its structure
+  
+        const rates = data?.rates;
+        if (!rates) {
+          throw new Error('Rates not found in API response');
+        }
+  
+        // Get an array of available currencies
+        const currencies = Object.keys(rates);
+  
+        // Randomly select a currency
+        const randomIndex = Math.floor(Math.random() * currencies.length);
+        const randomCurrency = currencies[randomIndex];
+        const rate = rates[randomCurrency].rate;
+  
+        console.log('Random Currency:', randomCurrency);
+        console.log('Rate:', rate);
+  
+        // Display the selected cryptocurrency and its rate
+        displayCryptoDataGraph(randomCurrency, rate);
+      })
+      .catch(error => {
+        console.log('Error retrieving cryptocurrency data:', error);
+      });
+  }
+  
 // Function to handle saving selected cryptocurrency to the dropdown menu and local storage
 function saveCryptoToLocalstorage(cryptoName) {
   const savedCryptos = JSON.parse(localStorage.getItem('savedCryptos')) || [];
@@ -145,4 +156,3 @@ saveButton.addEventListener('click', handleSaveCrypto);
 
 // Call the function to load saved cryptocurrencies when the page loads
 loadSavedCryptos();
-
