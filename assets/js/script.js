@@ -23,18 +23,18 @@ async function fetchCryptoData() {
 }
 
 // Function to display cryptocurrency data graph
-function displayCryptoDataGraph(crypto) {
+function displayCryptoDataGraph(crypto, rate) {
   // Display the selected cryptocurrency in the 8 Ball
   const ball = document.getElementById('ball');
   const cryptoName = document.createElement('div');
   cryptoName.classList.add('crypto-name');
-  cryptoName.textContent = crypto.name;
+  cryptoName.textContent = crypto;
   ball.appendChild(cryptoName);
 
   // Display the market data of the selected cryptocurrency
   const cryptoMarketData = document.createElement('div');
   cryptoMarketData.classList.add('crypto-market-data');
-  cryptoMarketData.textContent = `Price: ${crypto.price}, Market Cap: ${crypto.marketCap}`;
+  cryptoMarketData.textContent = `Rate: ${rate}`;
   ball.appendChild(cryptoMarketData);
 
   // Create a canvas element for the graph
@@ -48,8 +48,8 @@ function displayCryptoDataGraph(crypto) {
 
 // Function to generate the cryptocurrency graph using Chart.js library
 function generateCryptoGraph(canvas, crypto) {
-  // Retrieve the market data for the cryptocurrency
-  const marketData = crypto.marketData;
+  // Fetch the market data for the cryptocurrency (not implemented in this code)
+  const marketData = {};
 
   // Extract the labels and values from the market data
   const labels = Object.keys(marketData);
@@ -82,37 +82,86 @@ function generateCryptoGraph(canvas, crypto) {
   });
 }
 
-// Function to handle Magic 8 Ball shake event
 function handleMagic8BallShake() {
-    // Fetch cryptocurrency data
-    fetchCryptoData()
-      .then(data => {
-        console.log(data); // Log the data object to see its structure
-  
-        const rates = data?.rates;
-        if (!rates) {
-          throw new Error('Rates not found in API response');
-        }
-  
-        // Get an array of available currencies
-        const currencies = Object.keys(rates);
-  
-        // Randomly select a currency
-        const randomIndex = Math.floor(Math.random() * currencies.length);
-        const randomCurrency = currencies[randomIndex];
-        const rate = rates[randomCurrency].rate;
-  
-        console.log('Random Currency:', randomCurrency);
-        console.log('Rate:', rate);
-  
-        // Display the selected cryptocurrency and its rate
-        displayCryptoDataGraph(randomCurrency, rate);
-      })
-      .catch(error => {
-        console.log('Error retrieving cryptocurrency data:', error);
-      });
+  // Define an array of 8 Ball responses for buying
+  const buyResponses = [
+    'BROOOO! Buy Buy Buy!',
+    "You're gonna wanna buy",
+    'SELL! Lol jk, buy it idiot',
+    'Eh, why not?',
+    'WOAH!! Buy this!',
+    'No one loves you',
+    'Fuck it...',
+    'Shit yeah!',
+    'Yes.',
+    'Signs point to- who cares buy it',
+  ];
+
+  // Define an array of 8 Ball responses for selling
+  const sellResponses = [
+    'Reply hazy, try again.',
+    'Ask again later.',
+    'Better not tell you now.',
+    'Cannot predict now.',
+    'Concentrate and ask again.',
+    'Don\'t count on it.',
+    'My reply is no.',
+    'My sources say no.',
+    'Outlook not so good.',
+    'Very doubtful.',
+  ];
+
+  // Randomly select a response from either the buyResponses or sellResponses array
+  const randomIndex = Math.floor(Math.random() * (buyResponses.length + sellResponses.length));
+  const response = randomIndex < buyResponses.length ? buyResponses[randomIndex] : sellResponses[randomIndex - buyResponses.length];
+
+  // Remove existing response if present
+  const existingResponseDiv = document.querySelector('.response');
+  if (existingResponseDiv) {
+    existingResponseDiv.remove();
   }
-  
+
+  // Create a div element to display the response
+  const responseDiv = document.createElement('div');
+  responseDiv.classList.add('response');
+  responseDiv.style.backgroundColor = 'gray';
+  responseDiv.style.color = 'white';
+  responseDiv.textContent = response;
+
+  // Insert the response div below the Shake button and above the h3 tags
+  const shakeButton = document.getElementById('shake-button');
+  const questionSection = document.querySelector('.question');
+  questionSection.insertBefore(responseDiv, shakeButton.nextSibling);
+
+  // Fetch cryptocurrency data
+  fetchCryptoData()
+    .then(data => {
+      console.log(data); // Log the data object to see its structure
+
+      const rates = data?.rates;
+      if (!rates) {
+        throw new Error('Rates not found in API response');
+      }
+
+      // Get an array of available currencies
+      const currencies = Object.keys(rates);
+
+      // Randomly select a currency
+      const randomIndex = Math.floor(Math.random() * currencies.length);
+      const randomCurrency = currencies[randomIndex];
+      const rate = rates[randomCurrency].rate;
+
+      console.log('Random Currency:', randomCurrency);
+      console.log('Rate:', rate);
+
+      // Display the selected cryptocurrency and its rate
+      displayCryptoDataGraph(randomCurrency, rate);
+    })
+    .catch(error => {
+      console.log('Error retrieving cryptocurrency data:', error);
+    });
+}
+
 // Function to handle saving selected cryptocurrency to the dropdown menu and local storage
 function saveCryptoToLocalstorage(cryptoName) {
   const savedCryptos = JSON.parse(localStorage.getItem('savedCryptos')) || [];
