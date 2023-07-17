@@ -48,7 +48,7 @@ Any notes and work from MSU Coding Bootcamp [BCS](https://courses.bootcampspot.c
 The Crypto Bro's  
 Joeseph DeMasse [GitHub](https://github.com/OKJay50)  
 Sean Connor [GitHub](https://github.com/scsc22)  
-Keller  [GitHub](https://github.com/Trifectice)  
+Scott Keller  [GitHub](https://github.com/Trifectice)  
 Simon Darling [GitHub](https://github.com/DarlingDC2)  
 
 ## License
