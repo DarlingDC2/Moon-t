@@ -4,13 +4,10 @@
     --ltblue: #2e76c9dc;
     --grey: #3a3e42;
     --footer: #113c68b9;
-    --answer: #27313b7c;
-    --offwhite: rgb(132, 186, 202);
-    --clear: #27313b00;
 }
   
   .h1text {
-    color: var(--gold);
+    color: #fff;
     text-align: center;
     margin: 0;
     width: 100%;
@@ -41,7 +38,7 @@
   
   .dropdownBtn {
     padding: 10px 60px;
-    background-color: var(--offwhite);
+    background-color: var(--gold);
     border:var(--grey);
     border-radius: 5%;
     cursor: pointer;
@@ -127,23 +124,6 @@ body {
     text-align: center;
   }
 
-  .crypto-name {
-    background-color: var(--grey);
-    font-size: 30px;
-    margin-top: 25px;
-    padding: 10px;
-  }
-
-  .crypto-market-data {
-    padding: 10px;
-    font-size: 20px;
-    background-color: var(--grey);
-  }
-  
-  .crypto-graph {
-    background-color: var(--grey);
-  }
-
   .moon {
     position: relative;
     width: 500px;
@@ -157,33 +137,24 @@ body {
     margin-top: 10%;
   }
   
-  .res  {
-    background-color: var(--offwhite);
+  .answer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
   }
   
-  .shakeButton {
-        background-color: var(--clear);
-        border: var(--clear);
-        cursor: pointer;
-   }
- button {
-    padding: 15px 40px;
-    margin-bottom: 10px;
-    font-size: 24px;
-    border-radius: 5%;
-    background-color: var(--ltblue);
+  button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: var(--grey);
     color: #fff;
     border: none;
     cursor: pointer;
-  } 
-
-  h3 {
-    color: white;
-    margin: 80px 0px -5px 0px;
-  }
-
-  h4 {
-    color: white;
   }
   html {
     --s: 200px; /* control the size */

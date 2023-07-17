@@ -24,22 +24,22 @@ async function fetchCryptoData() {
 // Function to display cryptocurrency data graph
 function displayCryptoDataGraph(crypto, rate) {
   // Display the selected cryptocurrency in the 8 Ball
-  const nut = document.getElementById('nut');
+  const ball = document.getElementById('ball');
   const cryptoName = document.createElement('div');
   cryptoName.classList.add('crypto-name');
   cryptoName.textContent = crypto;
-  nut.appendChild(cryptoName);
+  ball.appendChild(cryptoName);
 
   // Display the market data of the selected cryptocurrency
   const cryptoMarketData = document.createElement('div');
   cryptoMarketData.classList.add('crypto-market-data');
   cryptoMarketData.textContent = `Rate: ${rate}`;
-  nut.appendChild(cryptoMarketData);
+  ball.appendChild(cryptoMarketData);
 
   // Create a canvas element for the graph
   const canvas = document.createElement('canvas');
   canvas.classList.add('crypto-graph');
-  nut.appendChild(canvas);
+  ball.appendChild(canvas);
 
   // Generate the graph using a library (e.g., Chart.js)
   generateCryptoGraph(canvas, crypto);
@@ -123,11 +123,9 @@ function handleMagic8BallShake() {
   // Create a div element to display the response
   const responseDiv = document.createElement('div');
   responseDiv.classList.add('response');
-  responseDiv.style.backgroundColor = '#27313b7c';
+  responseDiv.style.backgroundColor = 'gray';
   responseDiv.style.color = 'white';
-  responseDiv.style.fontSize = '25px'
   responseDiv.textContent = response;
-  responseDiv.style.padding = '30px 0px';
 
   // Insert the response div below the Shake button and above the h3 tags
   const shakeButton = document.getElementById('shake-button');
@@ -197,7 +195,7 @@ function handleSaveCrypto() {
 }
 
 // Add event listener to the Magic 8 Ball
-const magic8Ball = document.getElementById('nut');
+const magic8Ball = document.getElementById('ball');
 magic8Ball.addEventListener('click', handleMagic8BallShake);
 
 // Add event listener to the save button
