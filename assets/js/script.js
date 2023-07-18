@@ -1,14 +1,14 @@
-const magic8BallAPI = 'https://example.com/magic8ball';
+const magic8BallAPI = '';
 
 // CoinAPI
-const coinAPI = 'https://rest.coinapi.io/v1/exchangerate/USD?apikey=7b72ea8e-06cd-478c-a3bb-db22a10da94c&invert=true&output_form';
-
+var coinAPI = 'https://rest.coinapi.io/v1/exchangerate/USD?apikey=4da57841-3363-469f-a276-7b8dab79b836&invert=true&output_form';
+/*
 // Node As Service API
 const nodeAsServiceAPI = 'wss://ws.coinapi.io/v1/f742dc80-ee75-4715-b022-220e5d9ed028';
 
 // EMS API
 const emsAPI = 'https://ems-mgmt.coinapi.io/?apikey=d8952a6c-b2a2-4f79-81c7-0bc3922a67e5';
-
+*/
 // Function to fetch cryptocurrency data
 async function fetchCryptoData() {
   try {
@@ -24,31 +24,52 @@ async function fetchCryptoData() {
 
 // Function to display cryptocurrency data graph
 function displayCryptoDataGraph(crypto, rate) {
-  // Display the selected cryptocurrency in the 8 Ball
-  const nut = document.getElementById('nut');
-  const cryptoName = document.createElement('div');
-  cryptoName.classList.add('crypto-name');
-  cryptoName.textContent = crypto;
-  nut.appendChild(cryptoName);
-
-  // Display the market data of the selected cryptocurrency
-  const cryptoMarketData = document.createElement('div');
-  cryptoMarketData.classList.add('crypto-market-data');
-  cryptoMarketData.textContent = `Rate: ${rate}`;
-  nut.appendChild(cryptoMarketData);
-
-  // Create a canvas element for the graph
-  const canvas = document.createElement('canvas');
-  canvas.classList.add('crypto-graph');
-  nut.appendChild(canvas);
-  // Generate the graph using a library (e.g., Chart.js)
-  generateCryptoGraph(canvas, crypto);
+    // Display the selected cryptocurrency in the 8 Ball
+    const nut = document.getElementById('nut');
+    
+    // Before appending new elements, clear the existing ones
+    nut.innerHTML = '';
+  
+    const cryptoName = document.createElement('div');
+    cryptoName.classList.add('crypto-name');
+    cryptoName.textContent = crypto;
+    nut.appendChild(cryptoName);
+  
+    // Prevent event propagation to the parent
+    cryptoName.addEventListener('click', event => {
+      event.stopPropagation();
+    });
+  
+    // Display the market data of the selected cryptocurrency
+    const cryptoMarketData = document.createElement('div');
+    cryptoMarketData.classList.add('crypto-market-data');
+    cryptoMarketData.textContent = `Rate: ${rate}`;
+    nut.appendChild(cryptoMarketData);
+  
+    // Prevent event propagation to the parent
+    cryptoMarketData.addEventListener('click', event => {
+      event.stopPropagation();
+    });
+  
+    // Create a canvas element for the graph
+    const canvas = document.createElement('canvas');
+    canvas.classList.add('crypto-graph');
+    nut.appendChild(canvas);
+  
+    // Prevent event propagation to the parent
+    canvas.addEventListener('click', event => {
+      event.stopPropagation();
+    });
+  
+    // Generate the graph using a library (e.g., Chart.js)
+    generateCryptoGraph(canvas, crypto);
 }
-
+/*
 // Function to generate the cryptocurrency graph using Chart.js library
 function generateCryptoGraph(canvas, crypto) {
   // Fetch the market data for the cryptocurrency (not implemented in this code)
   const marketData = {};
+  
 
   // Extract the labels and values from the market data
   const labels = Object.keys(marketData);
@@ -79,7 +100,7 @@ function generateCryptoGraph(canvas, crypto) {
     },
   });
 }
-
+*/
 function handleMagic8BallShake() {
   // Define an array of 8 Ball responses for buying
   const buyResponses = [
@@ -135,31 +156,32 @@ function handleMagic8BallShake() {
 
   // Fetch cryptocurrency data
   fetchCryptoData()
-    .then(data => {
+  .then(data => {
       console.log(data); // Log the data object to see its structure
 
       const rates = data?.rates;
       if (!rates) {
-        throw new Error('Rates not found in API response');
+          throw new Error('Rates not found in API response');
       }
 
-      // Get an array of available currencies
-      const currencies = Object.keys(rates);
+      // Flatten the 2D array to a 1D array
+      const flatRates = rates.flat();
 
       // Randomly select a currency
-      const randomIndex = Math.floor(Math.random() * currencies.length);
-      const randomCurrency = currencies[randomIndex];
-      const rate = rates[randomCurrency].rate;
+      const randomIndex = Math.floor(Math.random() * flatRates.length);
+      const selectedCurrency = flatRates[randomIndex];  // This is the randomly selected cryptocurrency object
+      const assetIdQuote = selectedCurrency.asset_id_quote;
+      const rate = selectedCurrency.rate;
 
-      console.log('Random Currency:', randomCurrency);
+      console.log('Random Currency:', assetIdQuote);
       console.log('Rate:', rate);
 
       // Display the selected cryptocurrency and its rate
-      displayCryptoDataGraph(randomCurrency, rate);
-    })
-    .catch(error => {
+      displayCryptoDataGraph(assetIdQuote, rate);
+  })
+  .catch(error => {
       console.log('Error retrieving cryptocurrency data:', error);
-    });
+  });
 }
 
 // Function to handle saving selected cryptocurrency to the dropdown menu and local storage
@@ -190,7 +212,6 @@ function handleSaveCrypto() {
   const selectedCrypto = dropdownMenu.value;
 
   // Perform save operation for the selected cryptocurrency
-  // ...
 
   saveCryptoToLocalstorage(selectedCrypto);
 }
