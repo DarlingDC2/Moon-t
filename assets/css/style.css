@@ -142,16 +142,28 @@ button {
 }
 
 .crypto-name {
-    background-color: var(--grey);
-    font-size: 30px;
+    color: var(--white);
+    border-color:var(--blue);
+    background-color: var(--footergrey);
+    font-size: 45px;
+    border-style: double;
+    border-radius: 5%;
+    border-width: 20px;
     margin-top: 25px;
+    margin-bottom: 10px;
     padding: 10px;
 }
 
 .crypto-market-data {
     padding: 10px;
-    font-size: 20px;
-    background-color: var(--grey);
+    color: var(--white);
+    background-color: var(--blue);
+    border-style: solid;
+    border-color: var(--grey);
+    border-width: 5px;
+    padding: 20px;
+    margin-bottom: 5px;
+    font-size: 25px;
 }
 
 .crypto-graph {
