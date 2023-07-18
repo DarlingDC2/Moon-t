@@ -1,7 +1,10 @@
 const magic8BallAPI = '';
 
 // CoinAPI
-var coinAPI = 'https://rest.coinapi.io/v1/exchangerate/USD?apikey=4da57841-3363-469f-a276-7b8dab79b836&invert=true&output_form';
+var coinAPI = 'https://rest.coinapi.io/v1/exchangerate/USD?apikey=7b72ea8e-06cd-478c-a3bb-db22a10da94c&invert=true&output_form';
+let currentCryptoName = null;
+let currentCryptoRate = null;
+
 /*
 // Node As Service API
 const nodeAsServiceAPI = 'wss://ws.coinapi.io/v1/f742dc80-ee75-4715-b022-220e5d9ed028';
@@ -20,7 +23,6 @@ async function fetchCryptoData() {
     throw error;
   }
 }
-
 
 // Function to display cryptocurrency data graph
 function displayCryptoDataGraph(crypto, rate) {
@@ -62,7 +64,7 @@ function displayCryptoDataGraph(crypto, rate) {
     });
   
     // Generate the graph using a library (e.g., Chart.js)
-    generateCryptoGraph(canvas, crypto);
+   // generateCryptoGraph(canvas, crypto);
 }
 /*
 // Function to generate the cryptocurrency graph using Chart.js library
@@ -130,6 +132,8 @@ function handleMagic8BallShake() {
     'Very doubtful.',
   ];
 
+
+
   // Randomly select a response from either the buyResponses or sellResponses array
   const randomIndex = Math.floor(Math.random() * (buyResponses.length + sellResponses.length));
   const response = randomIndex < buyResponses.length ? buyResponses[randomIndex] : sellResponses[randomIndex - buyResponses.length];
@@ -154,6 +158,8 @@ function handleMagic8BallShake() {
   const questionSection = document.querySelector('.question');
   questionSection.insertBefore(responseDiv, shakeButton.nextSibling);
 
+  
+
   // Fetch cryptocurrency data
   fetchCryptoData()
   .then(data => {
@@ -173,10 +179,13 @@ function handleMagic8BallShake() {
       const assetIdQuote = selectedCurrency.asset_id_quote;
       const rate = selectedCurrency.rate;
 
-      console.log('Random Currency:', assetIdQuote);
+      //console.log('Random Currency:', assetIdQuote);
       console.log('Rate:', rate);
 
       // Display the selected cryptocurrency and its rate
+      currentCryptoName = assetIdQuote;
+      currentCryptoRate = rate;
+
       displayCryptoDataGraph(assetIdQuote, rate);
   })
   .catch(error => {
@@ -185,44 +194,93 @@ function handleMagic8BallShake() {
 }
 
 // Function to handle saving selected cryptocurrency to the dropdown menu and local storage
-function saveCryptoToLocalstorage(cryptoName) {
-  const savedCryptos = JSON.parse(localStorage.getItem('savedCryptos')) || [];
-  savedCryptos.push(cryptoName);
-  localStorage.setItem('savedCryptos', JSON.stringify(savedCryptos));
+function saveCryptoToLocalstorage(cryptoName, rate) {
+    const savedCryptos = JSON.parse(localStorage.getItem('savedCryptos')) || [];
+    savedCryptos.push({name: cryptoName, rate: rate});
+    localStorage.setItem('savedCryptos', JSON.stringify(savedCryptos));
 }
 
+// Function to display the saved cryptocurrencies in the dropdown menu
+// Function to display the saved cryptocurrencies in the dropdown menu
 function loadSavedCryptos() {
     const savedCryptos = JSON.parse(localStorage.getItem('savedCryptos')) || [];
-  
+
     // Display the saved cryptocurrencies in the dropdown menu
     const dropdownContent = document.querySelector('.dropdownContent');
     dropdownContent.innerHTML = ''; // Clear existing options
-  
+
     savedCryptos.forEach(crypto => {
       const dropdownOption = document.createElement('a');
       dropdownOption.href = '#'; // Set the link for each option
-      dropdownOption.textContent = crypto;
+      dropdownOption.textContent = crypto.name + ' - ' + crypto.rate;
       dropdownContent.appendChild(dropdownOption);
+
+      // Add an event listener to display the corresponding cryptocurrency data when an option is clicked
+      dropdownOption.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent the page from refreshing
+        displayCryptoDataGraph(crypto.name, crypto.rate);
+
+        // Scroll to the 'nut' section
+        const nutSection = document.getElementById('nut');
+        nutSection.scrollIntoView({behavior: "smooth"});
+      });
     });
-  }
+}
+
+
+// Call the function to load saved cryptocurrencies when the page loads
+loadSavedCryptos();
+
 
 // Function to handle saving selected cryptocurrency to the dropdown menu and local storage
 function handleSaveCrypto() {
-  const dropdownMenu = document.getElementById('dropdown-menu');
-  const selectedCrypto = dropdownMenu.value;
+    function loadSavedCryptos() {
+        const savedCryptos = JSON.parse(localStorage.getItem('savedCryptos')) || [];
+    
+        // Display the saved cryptocurrencies in the dropdown menu
+        const dropdownContent = document.querySelector('.dropdownContent');
+        dropdownContent.innerHTML = ''; // Clear existing options
+    
+        savedCryptos.forEach(crypto => {
+          const dropdownOption = document.createElement('a');
+          dropdownOption.href = '#'; // Set the link for each option
+          dropdownOption.textContent = crypto.name + ' - ' + crypto.rate;
+    
+          // Add click event listener
+          dropdownOption.addEventListener('click', function(event) {
+            event.preventDefault();
+    
+            // Scroll to the 'nut' section
+            const nutSection = document.getElementById('nut');
+            nutSection.scrollIntoView({behavior: "smooth"});
+          });
+    
+          dropdownContent.appendChild(dropdownOption);
+        });
+    }
+}    
 
-  // Perform save operation for the selected cryptocurrency
-
-  saveCryptoToLocalstorage(selectedCrypto);
-}
 
 // Add event listener to the Magic 8 Ball
 const magic8Ball = document.getElementById('nut');
 magic8Ball.addEventListener('click', handleMagic8BallShake);
 
+// Create and insert the save button dynamically
+const saveButton = document.createElement('button');
+saveButton.id = 'save-button';
+saveButton.textContent = 'Save';
+const questionSection = document.querySelector('.question');
+questionSection.appendChild(saveButton);
+
+// Function to handle saving selected cryptocurrency to the dropdown menu and local storage
+function handleSaveCrypto() {
+  saveCryptoToLocalstorage(currentCryptoName, currentCryptoRate);
+
+  // Refresh the dropdown options
+  loadSavedCryptos();
+}  
+
 // Add event listener to the save button
-const saveButton = document.getElementById('save-button');
 saveButton.addEventListener('click', handleSaveCrypto);
 
-// Call the function to load saved cryptocurrencies when the page loads
-loadSavedCryptos();
+
