@@ -111,7 +111,7 @@ body {
     margin-bottom: -6%;
 }
 
-button {
+.shakeButton {
     padding: 15px 40px;
     margin-bottom: 10px;
     font-size: 24px;
@@ -142,22 +142,48 @@ button {
 }
 
 .crypto-name {
-    background-color: var(--grey);
-    font-size: 30px;
+    color: var(--white);
+    border-color:var(--blue);
+    background-color: var(--footergrey);
+    font-size: 45px;
+    border-style: double;
+    border-radius: 10%;
+    border-width: 20px;
     margin-top: 25px;
+    margin-bottom: 10px;
     padding: 10px;
 }
 
 .crypto-market-data {
     padding: 10px;
-    font-size: 20px;
-    background-color: var(--grey);
+    color: var(--white);
+    background-color: var(--blue);
+    border-style: solid;
+    border-color: var(--grey);
+    border-width: 5px;
+    padding: 20px;
+    margin-bottom: 5px;
+    font-size: 25px;
 }
 
 .crypto-graph {
     background-color: var(--grey);
 }
   
+.saveButton {
+    text-align: center;
+    padding: 10px 35px;
+    margin-bottom: 10px;
+    margin-right: 0;
+    font-size: 24px;
+    border-radius: 5%;
+    background-color: var(--ltblue);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    position: absolute;
+}
+
 h3 {
     font-size: 25px;
     color: white;
@@ -207,4 +233,5 @@ html {
     repeating-conic-gradient(from 30deg,var(--c1) 0 60deg,var(--c2) 0 120deg,var(--c3) 0 180deg);
     background-size: var(--s) calc(var(--s)*0.577);
 }
+
   
