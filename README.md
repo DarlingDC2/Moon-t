@@ -57,7 +57,8 @@ Please refer to the LICENSE in the Git Repository 'Moon-t'
 
 
 ## Link
-[Published Page]()
+[Published Page](https://darlingdc2.github.io/Moon-t/)  
+[GitHub Repo](https://github.com/DarlingDC2/Moon-t)
 
 ---
   
