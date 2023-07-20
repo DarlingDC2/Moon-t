@@ -274,6 +274,7 @@ saveButton.textContent = 'Save';
 saveButton.style.padding = '10px 25px';
 saveButton.style.backgroundColor = '#27313b7c';
 saveButton.style.color = 'white';
+saveButton.style.borderRadius = '15%';
 saveButton.style.borderRadius = '20%';
 saveButton.style.fontSize = '20px';
 
