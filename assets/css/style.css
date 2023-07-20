@@ -71,7 +71,10 @@ nav {
     padding: 30px;
     z-index: 1;
     border-radius: 5%;
+    max-height: 400px; 
+    overflow-y: auto;  
 }
+
   
 .dropdownContent a {
     display: block;
@@ -237,6 +240,4 @@ html {
     calc(.5*var(--s)) calc(.5*var(--s)*0.577),
     repeating-conic-gradient(from 30deg,var(--c1) 0 60deg,var(--c2) 0 120deg,var(--c3) 0 180deg);
     background-size: var(--s) calc(var(--s)*0.577);
-}
-
   
