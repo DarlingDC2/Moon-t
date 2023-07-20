@@ -1,4 +1,7 @@
-const magic8BallAPI = '';
+
+const magic8BallAPI = 'https://www.eightballapi.com/api';
+
+
 
 // CoinAPI
 var coinAPI = 'https://rest.coinapi.io/v1/exchangerate/USD?apikey=7b72ea8e-06cd-478c-a3bb-db22a10da94c&invert=true&output_form';
@@ -103,60 +106,39 @@ function generateCryptoGraph(canvas, crypto) {
   });
 }
 */
-function handleMagic8BallShake() {
-  // Define an array of 8 Ball responses for buying
-  const buyResponses = [
-    'BROOOO! Buy Buy Buy!',
-    "You're gonna wanna buy",
-    'SELL! Lol jk, buy it idiot',
-    'Eh, why not?',
-    'WOAH!! Buy this!',
-    'No one loves you',
-    'Fuck it...',
-    'Shit yeah!',
-    'Yes.',
-    'Signs point to- who cares buy it',
-  ];
 
-  // Define an array of 8 Ball responses for selling
-  const sellResponses = [
-    'Reply hazy, try again.',
-    'Ask again later.',
-    'Better not tell you now.',
-    'Cannot predict now.',
-    'Concentrate and ask again.',
-    'Don\'t count on it.',
-    'My reply is no.',
-    'My sources say no.',
-    'Outlook not so good.',
-    'Very doubtful.',
-  ];
+// Function to fetch Magic 8 Ball answer
+async function fetchMagic8BallAnswer() {
+    try {
+      const response = await   fetch(magic8BallAPI, {headers: {
+        mode: "cors", 
+        'Referrer-Policy': 'origin',
+         "Content-Type": "application/json"}}) ;
+      console.log(response)
+      const data = await response.json();
+      return data.answer;  // assuming the response has 'answer' property
+    } catch (error) {
+      console.log('Error fetching Magic 8 Ball answer:');
+      console.log(error)
+      throw error;
+    }
+    
+}
+ 
+  /*fetch(magic8BallAPI, {headers: {mode: "cors", 'Referrer-Policy': 'origin', "Content-Type": "application/json"}}) 
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));*/
 
-
-
-  // Randomly select a response from either the buyResponses or sellResponses array
-  const randomIndex = Math.floor(Math.random() * (buyResponses.length + sellResponses.length));
-  const response = randomIndex < buyResponses.length ? buyResponses[randomIndex] : sellResponses[randomIndex - buyResponses.length];
-
-  // Remove existing response if present
-  const existingResponseDiv = document.querySelector('.response');
-  if (existingResponseDiv) {
-    existingResponseDiv.remove();
-  }
-
-  // Create a div element to display the response
-  const responseDiv = document.createElement('div');
-  responseDiv.classList.add('response');
-  responseDiv.style.backgroundColor = '#27313b7c';
-  responseDiv.style.color = 'white';
-  responseDiv.style.fontSize = '25px';
-  responseDiv.textContent = response;
-  responseDiv.style.padding = '30px 0px';
-  
-  // Insert the response div below the Shake button and above the h3 tags
-  const shakeButton = document.getElementById('shake-button');
-  const questionSection = document.querySelector('.question');
-  questionSection.insertBefore(responseDiv, shakeButton.nextSibling);
+  function handleMagic8BallShake() {
+    // Fetch Magic 8 Ball answer
+    fetchMagic8BallAnswer()
+      .then(answer => {
+        // Remove existing response if present
+        const existingResponseDiv = document.querySelector('.response');
+        if (existingResponseDiv) {
+          existingResponseDiv.remove();
+        }
 
   
 
@@ -267,6 +249,11 @@ magic8Ball.addEventListener('click', handleMagic8BallShake);
 
 // Create and insert the save button dynamically
 const saveButton = document.createElement('button');
+saveButton.style.padding = '10px 25px';
+saveButton.style.backgroundColor = '#27313b7c';
+saveButton.style.color = 'white';
+saveButton.style.borderRadius = '15%';
+saveButton.style.fontSize = '20px';
 saveButton.id = 'save-button';
 saveButton.textContent = 'Save';
 saveButton.style.padding = '10px 25px';
