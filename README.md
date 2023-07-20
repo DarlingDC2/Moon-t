@@ -18,18 +18,18 @@ The Crypto Bro's hope you enjoy!
 
 To get started with our application made just for you, you'll simply go ahead and give the button a shake by clicking on it. You'll be presented with either a negative response to let you know it's not time for you to buy, or a positive answer to get your foot in the door and buy.  When a positive answer is given, you'll be presented with Crypto information of a Crypto you should be investing in.  You'll also have the option to save this response for future reference if you're still on the fence.  This is done by selecting the "Save" button near the Crypto information.  You're able to access your saved Cryptos by selecting the "Saved" button in the header to show a drop down menu of the past Cryptos you thought looked good.  You can select any of these and the information will be presented to you again!
 
-(Screen-Shots of usage)
-####  
 
-<img src="" alt="" />
+####  You'll see in this first image a display of the webpage, with some user features highlighted.
 
-####  
+<img src="assets\img\webpageelements.png" alt="webpage" />
 
-<img src="" alt="" />
+####  In this next screenshot, you'll find that when the 'SHAKE' button is selected, if you're given a positive response that you should invest, you'll recieve a Crypto and it's rate!
 
-####  
+<img src="assets\img\shakeresponse.png" alt="shake response on page" />
 
-<img src="" alt="" />
+####  Finally, we have a screenshot of the "SAVED" button's dropdown menu showing the Crypto's you decided to save by choosing the "SAVE" button.
+
+<img src="assets\img\savedropdown.png" alt="save elements" />
 
 ## Credits
 
