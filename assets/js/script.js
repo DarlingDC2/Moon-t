@@ -1,4 +1,4 @@
-const magic8BallAPI = 'https://eightballapi.com/api';
+const magic8BallAPI = 'https://www.eightballapi.com/api';
 
 
 // CoinAPI
@@ -107,19 +107,25 @@ function generateCryptoGraph(canvas, crypto) {
 // Function to fetch Magic 8 Ball answer
 async function fetchMagic8BallAnswer() {
     try {
-      const response = await fetch(magic8BallAPI);
+      const response = await   fetch(magic8BallAPI, {headers: {
+        mode: "cors", 
+        'Referrer-Policy': 'origin',
+         "Content-Type": "application/json"}}) ;
+      console.log(response)
       const data = await response.json();
       return data.answer;  // assuming the response has 'answer' property
     } catch (error) {
-      console.log('Error fetching Magic 8 Ball answer:', error);
+      console.log('Error fetching Magic 8 Ball answer:');
+      console.log(error)
       throw error;
     }
-  }
-  
-  fetch('data.json')
+    
+}
+ 
+  /*fetch(magic8BallAPI, {headers: {mode: "cors", 'Referrer-Policy': 'origin', "Content-Type": "application/json"}}) 
   .then(response => response.json())
   .then(data => console.log(data))
-  .catch(error => console.error('Error:', error));
+  .catch(error => console.error('Error:', error));*/
 
   function handleMagic8BallShake() {
     // Fetch Magic 8 Ball answer
@@ -259,6 +265,11 @@ shakeButton.addEventListener('click', handleMagic8BallShake);
 
 // Create and insert the save button dynamically
 const saveButton = document.createElement('button');
+saveButton.style.padding = '10px 25px';
+saveButton.style.backgroundColor = '#27313b7c';
+saveButton.style.color = 'white';
+saveButton.style.borderRadius = '15%';
+saveButton.style.fontSize = '20px';
 saveButton.id = 'save-button';
 saveButton.textContent = 'Save';
 const questionSection = document.querySelector('.question');
