@@ -115,6 +115,16 @@ async function fetchMagic8BallAnswer() {
       throw error;
     }
   }
+
+
+  // Create a div element to display the response
+  const responseDiv = document.createElement('div');
+  responseDiv.classList.add('response');
+  responseDiv.style.backgroundColor = '#27313b7c';
+  responseDiv.style.color = 'white';
+  responseDiv.style.fontSize = '25px';
+  responseDiv.textContent = response;
+  responseDiv.style.padding = '30px 0px';
   
   fetch('data.json')
   .then(response => response.json())
@@ -261,8 +271,18 @@ shakeButton.addEventListener('click', handleMagic8BallShake);
 const saveButton = document.createElement('button');
 saveButton.id = 'save-button';
 saveButton.textContent = 'Save';
+saveButton.style.padding = '10px 25px';
+saveButton.style.backgroundColor = '#27313b7c';
+saveButton.style.color = 'white';
+saveButton.style.borderRadius = '20%';
+saveButton.style.fontSize = '20px';
+
+
+
 const questionSection = document.querySelector('.question');
 questionSection.appendChild(saveButton);
+
+
 
 // Function to handle saving selected cryptocurrency to the dropdown menu and local storage
 function handleSaveCrypto() {
